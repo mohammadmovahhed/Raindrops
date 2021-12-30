@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Raindrops.Views.Popup.FinnishTime"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"  
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             CloseWhenBackgroundIsClicked="True"
+             BackgroundColor="#F3ACA9B2">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="False"/>
+    </pages:PopupPage.Animation>
+
+    <ContentPage.Content>
+
+        <Frame BackgroundColor="Transparent"
+               HasShadow="False"
+               Padding="0"
+               Margin="40">
+            <Grid RowDefinitions="*,3.5*,*,*,*,*,*">
+
+                <forms:AnimationView
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    x:Name="waitingGif"
+                    Animation="MexicanFella.json"
+                    AutoPlay="True"
+                    RepeatMode="Infinite"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="20"/>
+
+                <Button Grid.Row="3" Text="تکرار بازی" Clicked="RestartButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10"/>
+                <Button Grid.Row="4" Text="منو اصلی" Clicked="MenuButton_Clicke" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10" />
+                <Button Grid.Row="5" Text="خروج" Clicked="QuitButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10"/>
+            </Grid>
+        </Frame>
+
+    </ContentPage.Content>
+</pages:PopupPage>

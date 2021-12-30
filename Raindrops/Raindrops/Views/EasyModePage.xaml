@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundImageSource="FondoBackGround.webp"
+             x:Class="Raindrops.Views.EasyModePage">
+    <ContentPage.Content>
+        <Grid>
+            
+            <Grid x:Name="grid"
+                ColumnDefinitions="*,*,*,*,*">
+            
+            <Grid ColumnDefinitions="*,*"
+                  Grid.Column="3" Opacity=".8"
+                  VerticalOptions="Start" Margin="0,20,0,0"
+                  BackgroundColor="#ccd7e4">
+                    <Label x:Name="Scorelbl" TextColor="#d00000"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                    <Label Text="امتیاز" TextColor="#d00000"
+                       Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"/>
+            </Grid>
+
+                <Grid ColumnDefinitions="*,*"
+                  Grid.Column="2" Opacity=".8"
+                  VerticalOptions="Start" Margin="0,20,0,0"
+                  BackgroundColor="#ccd7e4">
+                    <Label x:Name="Timerlbl" TextColor="#d00000"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                    <Label Text="زمان" TextColor="#d00000"
+                       Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"/>
+                </Grid>
+                
+                <ImageButton Source="more.png" 
+                             Grid.Column="0" Grid.Row="0"
+                             VerticalOptions="Start"
+                             Clicked="OnImageButtonClicked"
+                             BackgroundColor="Transparent"
+                             Margin="0,10,0,0"/>
+            </Grid>
+            
+            <Grid VerticalOptions="End"
+                  Margin="5">
+                <Grid RowDefinitions="*,*,*,*,*"
+                      ColumnDefinitions="*,*,*"
+                      VerticalOptions="End" Grid.Column="0"
+                      Grid.Row="1" Grid.ColumnSpan="5"
+                      Margin="30,0,30,5">
+                    <Grid ColumnDefinitions="4*,*"
+                          Grid.ColumnSpan="3" Opacity="0.7"
+                          BackgroundColor="#a8dadc">
+                        <Entry BackgroundColor="Transparent"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               MaxLength="3" TextColor="#d00000"
+                               IsReadOnly="True"
+                               Opacity=".7" x:Name="ResultLable"
+                               FontFamily="IranSensWebbold"/>
+                        <Button BackgroundColor="Transparent"
+                                Text="X" Grid.Column="1" TextColor="#d00000"
+                                Opacity=".7" Clicked="OnBtnClear"
+                                FontFamily="IranSensWebbold"/>
+                    </Grid>
+                    <Button BackgroundColor="#212f45"
+                                Text="1" Grid.Column="0"
+                                Opacity=".7" Grid.Row="3"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="2" Grid.Column="1"
+                                Opacity=".7" Grid.Row="3"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="3" Grid.Column="2"
+                                Opacity=".7" Grid.Row="3"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="4" Grid.Column="0"
+                                Opacity=".7" Grid.Row="2"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="5" Grid.Column="1"
+                                Opacity=".7" Grid.Row="2"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="6" Grid.Column="2"
+                                Opacity=".7" Grid.Row="2"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="7" Grid.Column="0"
+                                Opacity=".7" Grid.Row="1"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="8" Grid.Column="1"
+                                Opacity=".7" Grid.Row="1"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="9" Grid.Column="2"
+                                Opacity=".7" Grid.Row="1"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="0" Grid.Column="0"
+                                Opacity=".7" Grid.Row="4"
+                                FontFamily="IranSensWebbold"
+                            Clicked="OnBtnClicked" TextColor="White"/>
+                    <Button BackgroundColor="#212f45"
+                                Text="محاسبه" Grid.Column="1"
+                                Opacity=".7" Grid.Row="4"
+                                FontFamily="IranSensWebbold"
+                                Grid.ColumnSpan="2"
+                            Clicked="OnBtnEnter" TextColor="White"/>
+                </Grid>
+            </Grid>
+            
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

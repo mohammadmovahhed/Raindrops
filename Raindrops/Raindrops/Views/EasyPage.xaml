@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Raindrops.Views.EasyPage">
+    <ContentPage.Content>
+        <Grid x:Name="GridContent"
+              BackgroundColor="#023e8a"
+              ColumnDefinitions="*,*,*,*">
+            <Button Text="شروع" 
+                    TextColor="White" 
+                    VerticalOptions="Center"
+                    BackgroundColor="LightBlue"
+                    Margin="10,0"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
