@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:pages="http://rotorgames.com"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  CloseWhenBackgroundIsClicked="True"
+                  x:Class="Raindrops.Views.Popup.FinnishResult">
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="9*,*"
+              BackgroundColor="BurlyWood">
+            <ListView Grid.Row="0" FlowDirection="RightToLeft"
+                      Margin="20"
+                      BackgroundColor="White"
+                      SelectionMode="None"
+                      x:Name="lst">
+                <ListView.Header>
+                    <Grid ColumnDefinitions="*" BackgroundColor="LightBlue" >
+                        <Label Grid.Column="0" 
+                               Text="امتیاز"
+                               FontAttributes="Bold"
+                               FontFamily="IRANSANSWEBPERSIAN"
+                               HorizontalTextAlignment="Center"/>
+                       
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="Center">
+                                <Grid ColumnDefinitions="*"
+                                      Padding="0">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Score}"
+                                           FontFamily="IRANSANSWEBPERSIAN"
+                                           VerticalOptions="Center"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"/>
+                                   
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="بازی مجدد"
+                    Grid.Row="1"
+                    Margin="20"
+                    CornerRadius="10"
+                    FontFamily="IranSensWeb"
+                    TextColor="White"
+                    Clicked="Button_Clicked"
+                    BackgroundColor="DarkOrchid"/>
+        </Grid>
+    </ContentPage.Content>
+</pages:PopupPage>

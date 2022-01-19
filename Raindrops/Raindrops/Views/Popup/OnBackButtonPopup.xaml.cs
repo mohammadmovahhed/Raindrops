@@ -8,10 +8,8 @@ namespace Raindrops.Views.Popup
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OnBackButtonPopup : PopupPage
     {
-        public event EventHandler onClose;
-        public event EventHandler onRestart;
-        public event EventHandler onQuit;
-        public event EventHandler onMenu;
+        public event EventHandler OnClose;
+        public event EventHandler OnQuit;
         public OnBackButtonPopup()
         {
             InitializeComponent();
@@ -20,26 +18,13 @@ namespace Raindrops.Views.Popup
         private async void ResumeButton_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PopAllAsync(true);
-            onClose?.Invoke(this, e);
-        }
-
-        private async void RestartButton_Clicked(object sender, EventArgs e)
-        {
-            await PopupNavigation.Instance.PopAllAsync(true);
-            onRestart?.Invoke(this, e);
-        }
-
-        private async void MenuButton_Clicke(object sender, EventArgs e)
-        {
-            await PopupNavigation.Instance.PopAllAsync(true);
-            await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new MainPage());
+            OnClose?.Invoke(this, e);
         }
 
         private async void QuitButton_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PopAllAsync(true);
-            onQuit?.Invoke(this, e);
+            OnQuit?.Invoke(this, e);
         }
     }
 }

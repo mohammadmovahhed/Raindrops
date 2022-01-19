@@ -7,67 +7,89 @@ using Rg.Plugins.Popup.Services;
 using Raindrops.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Raindrops.Views.Popup;
+using Raindrops.ViweModels;
 
 namespace Raindrops.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EasyModePage : ContentPage
     {
-        List<Grid> Anser = new List<Grid>();
+        //for start animation
+        Frame Frm = new Frame { CornerRadius = 40, BackgroundColor = Color.DodgerBlue, VerticalOptions = LayoutOptions.Start, HorizontalOptions = LayoutOptions.Center, Margin = 40 };
+        Label LblTimer = new Label { TextColor = Color.White, FontFamily = "IranSensWebbold", FontSize = 20 };
+        Base F = new Base();
 
-        
-        int seconds = 60;
-        int scoreValue = 300;
-        int scoreMin = 5;
-        int TimeSetGrid = 3, ValueSetGrid = 5;
-        int anserNum = 5;
-        int trueAnser = 0;
+        private List<Grid> Anser = new List<Grid>();
+
+        private int seconds = 60; //timer
+        private int scoreValue = 300; //Player initial score
+        private int scoreMin = 5; //Every second, the score decreases by 5 points
+        private int TimeSetGrid = 3, ValueSetGrid = 5; //Grid means rain-drop
 
         public EasyModePage()
         {
             InitializeComponent();
-            Timer();
         }
 
+        //The user has 60 seconds and during this time he encounters several problems
         private void Timer()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1),  () =>
-            {
-                seconds--;
-                if (seconds == -1) 
-                {
-                    
-                    return false;
-                }
-                TimeSetGrid++;
-                scoreValue -= scoreMin;
-                if (TimeSetGrid >= ValueSetGrid) 
-                {
-                    CreateImageGrid();
-                    TimeSetGrid = 0;
-                }
-                if (seconds > -1 && scoreValue > -1) 
-                {
-                    Timerlbl.Text = seconds.ToString();
-                    Scorelbl.Text = scoreValue.ToString();
-                }
-                else
-                {
-                    return false;
-                }
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+           {
+               seconds--;
+               if (seconds == -1)
+               {
+                   Task.Run(async () =>
+                   {
+                       Insert();
+                       await Task.Delay(100);
+                       await PopupNavigation.Instance.PushAsync(new FinnishResult());
+                   });
+                   return false;
+               }
+               TimeSetGrid++;
+               scoreValue -= scoreMin;
+               if (TimeSetGrid >= ValueSetGrid)
+               {
+                   CreateImageGrid();
+                   TimeSetGrid = 0;
+               }
+               if (seconds > -1 && scoreValue > -1)
+               {
+                   Timerlbl.Text = seconds.ToString();
+                   Scorelbl.Text = scoreValue.ToString();
+               }
+               else
+               {
+                   Task.Run(async () =>
+                   {
+                       Insert();
+                       await Task.Delay(100);
+                       await PopupNavigation.Instance.PushAsync(new FinnishResult());
+                   });
+                   return false;
+               }
 
-                return true;
-            });
+               return true;
+           });
+        }
+        private async void Insert()
+        {
+            PlayerViewModel pvm=new PlayerViewModel();
+            Player p = new Player();
+            p.Score = scoreValue;
+            await pvm.PlayerVm.InsertScore(p);
         }
 
-        public Grid SetImageGrid()
+        //In this function, raindrops are made
+        private Grid SetImageGrid()
         {
             Grid imageGrid = new Grid
             {
                 VerticalOptions = LayoutOptions.Start,
                 HorizontalOptions = LayoutOptions.Center
             };
-
             Random rnd = new Random();
             int i = rnd.Next(0, 5);
             Grid.SetColumn(imageGrid, i);
@@ -87,44 +109,43 @@ namespace Raindrops.Views
                 VerticalOptions = LayoutOptions.End
             };
 
+            int text1, text2, Multiply;
             var LstOprator = new List<string> { "+", "-", "*", "/" };
-            int index = rnd.Next(LstOprator.Count() - 4);
-
-            if (index == 0)
+            int index = rnd.Next(LstOprator.Count() - 1);
+            switch (index)
             {
-                int text1 = rnd.Next(0, 50);
-                int text2 = rnd.Next(1, 50);
-                int Multiply = text1 + text2;
-                Fnumber.Text = text1.ToString();
-                Snumber.Text = text2.ToString();
-                imageGrid.AutomationId = Multiply.ToString();
-            }
-            else if (index == 1)
-            {
-                int text1 = rnd.Next(20, 120);
-                int text2 = rnd.Next(0, 20);
-                int Multiply = text1 - text2;
-                Fnumber.Text = text1.ToString();
-                Snumber.Text = text2.ToString();
-                imageGrid.AutomationId = Multiply.ToString();
-            }
-            else if (index == 2)
-            {
-                int text1 = rnd.Next(0, 11);
-                int text2 = rnd.Next(0, 11);
-                int Multiply = text1 * text2;
-                Fnumber.Text = text1.ToString();
-                Snumber.Text = text2.ToString();
-                imageGrid.AutomationId = Multiply.ToString();
-            }
-            else if (index == 3)
-            {
-                int text1 = rnd.Next(9, 99);
-                int text2 = rnd.Next(1, 9);
-                int Multiply = text1 / text2;
-                Fnumber.Text = text1.ToString();
-                Snumber.Text = text2.ToString();
-                imageGrid.AutomationId = Multiply.ToString();
+                case 0:
+                    text1 = rnd.Next(0, 100);
+                    text2 = rnd.Next(1, 50);
+                    Multiply = text1 + text2;
+                    Fnumber.Text = text1.ToString();
+                    Snumber.Text = text2.ToString();
+                    imageGrid.AutomationId = Multiply.ToString();
+                    break;
+                case 1:
+                    text1 = rnd.Next(50, 120);
+                    text2 = rnd.Next(0, 49);
+                    Multiply = text1 - text2;
+                    Fnumber.Text = text1.ToString();
+                    Snumber.Text = text2.ToString();
+                    imageGrid.AutomationId = Multiply.ToString();
+                    break;
+                case 2:
+                    text1 = rnd.Next(1, 11);
+                    text2 = rnd.Next(0, 11);
+                    Multiply = text1 * text2;
+                    Fnumber.Text = text1.ToString();
+                    Snumber.Text = text2.ToString();
+                    imageGrid.AutomationId = Multiply.ToString();
+                    break;
+                case 3:
+                    text1 = rnd.Next(9, 99);
+                    text2 = rnd.Next(1, 9);
+                    Multiply = text1 / text2;
+                    Fnumber.Text = text1.ToString();
+                    Snumber.Text = text2.ToString();
+                    imageGrid.AutomationId = Multiply.ToString();
+                    break;
             }
 
             Label Oprator = new Label
@@ -135,7 +156,6 @@ namespace Raindrops.Views
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center
             };
-
             imageGrid.Children.Add(new Image
             {
                 Source = "raindrop.webp",
@@ -143,15 +163,13 @@ namespace Raindrops.Views
                 VerticalOptions = LayoutOptions.Fill,
                 TranslationY = -2
             });
-
             imageGrid.Children.Add(Oprator);
             imageGrid.Children.Add(Fnumber);
             imageGrid.Children.Add(Snumber);
 
-
             int r = 10;
             Animation anime = new Animation(v => imageGrid.TranslationY = v, 0, grid.Height - (imageGrid.Height + 80), Easing.Linear,
-                ()=>
+                () =>
                 {
                     List<Grid> an = Anser.Where(x => x.AutomationId == imageGrid.AutomationId).ToList();
                     if (an.Count > 0)
@@ -169,16 +187,15 @@ namespace Raindrops.Views
             r += 10;
             anime1.Commit(imageGrid, "Linear", 16, 10000);
 
-
             grid.Children.Add(imageGrid);
-            
             return imageGrid;
         }
 
+        //This function checks whether the answer is correct or not
         private async void OnBtnEnter(object sender, EventArgs e)
         {
-            var gridlst = Anser.ToList();
-            foreach (var item in gridlst)
+            List<Grid> gridlst = Anser.ToList();
+            foreach (Grid item in gridlst)
             {
                 if (item.AutomationId == ResultLable.Text)
                 {
@@ -187,29 +204,21 @@ namespace Raindrops.Views
                     ResultLable.Text = string.Empty;
                     WinAnimation(item);
                     PlaySound.Play("1.wav");
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
                     Anser.Remove(item);
                     grid.Children.Remove(item);
-                    trueAnser++;
-                    if (trueAnser >= anserNum)
+                    TimeSetGrid++;
+                    if (TimeSetGrid >= ValueSetGrid)
                     {
-                        trueAnser -= 2;
-                        anserNum++;
-                        await Task.Delay(200);
-                        CreateImageGrid();
+                        TimeSetGrid -= 3;
+                        ValueSetGrid++;
                     }
                 }
-                //else
-                //{
-                //    scoreValue -= 30;
-                //    Scorelbl.Text = scoreValue.ToString();
-                //    ResultLable.Text = string.Empty;
-                //}
-                //break;
             }
             ResultLable.Text = string.Empty;
         }
-       
+
+        //Show animation at correct answer time
         private void WinAnimation(Grid grid)
         {
             grid.CancelAnimations();
@@ -225,42 +234,70 @@ namespace Raindrops.Views
 
         private void CreateImageGrid()
         {
-            var img = SetImageGrid();
+            Grid img = SetImageGrid();
             Anser.Add(img);
-            //javab.Add(img.AutomationId);
         }
 
+        //Clear input (Entry.text)
         private void OnBtnClear(object sender, EventArgs e)
         {
             ResultLable.Text = string.Empty;
         }
-
+        //Display the numbers entered in the input
         private void OnBtnClicked(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             ResultLable.Text += button.Text;
         }
 
+        //when push this button = game start
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await F.RunIsBusyTaskAsync(() => Play());
+
+            startGame.IsVisible = startGame.IsEnabled = false;
+            grid.IsEnabled = grid.IsVisible = keypadGrid.IsEnabled = keypadGrid.IsVisible = true;
+            Timer();
+        }
+        //animation start game (number)
+        public async Task Play()
+        {
+            Frm.Content = LblTimer;
+            mainGrid.Children.Add(Frm);
+            Animation ParentAnimation = new Animation();
+            Animation animate = new Animation(v => Frm.Scale = v, 1.2, 0.5, Easing.SpringIn);
+            Animation animate1 = new Animation(v => Frm.Scale = v, 0.5, 1.2, Easing.SpringOut);
+            ParentAnimation.Add(0, 0.5, animate);
+            ParentAnimation.Add(0.5, 1, animate1);
+            LblTimer.Text = 3.ToString();
+            ParentAnimation.Commit(Frm, "counterAnim", 16, 1000);
+            await Task.Delay(1000);
+            ParentAnimation.Add(0, 0.7, animate);
+            ParentAnimation.Add(0.7, 1, animate1);
+            LblTimer.Text = 2.ToString();
+            ParentAnimation.Commit(Frm, "counterAnim", 16, 1000);
+            await Task.Delay(1000);
+            ParentAnimation.Add(0, 0.5, animate);
+            ParentAnimation.Add(0.5, 1, animate1);
+            LblTimer.Text = 1.ToString();
+            ParentAnimation.Commit(Frm, "counterAnim", 16, 1000);
+            await Task.Delay(1000);
+            Frm.IsVisible = false;
+            mainGrid.Children.Remove(Frm);
+        }
+
+        //show popup quit, resume, menu
+        //popUp Menu functions
         private void OnImageButtonClicked(object sender, EventArgs e)
         {
             Task t = new Task(async () =>
             {
-                var popup = new Popup.OnBackButtonPopup();
-                //popup.onClose += RunReactionTime;
-                //popup.onRestart += RunRestartGame;
-                popup.onQuit += RunQuitGame;
+                Popup.OnBackButtonPopup popup = new Popup.OnBackButtonPopup();
+                popup.OnQuit += RunQuitGame;
                 await PopupNavigation.Instance.PushAsync(popup);
             });
             t.RunSynchronously();
         }
-
-        //private async void RunRestartGame(object s, EventArgs e)
-        //{
-            //await Navigation.PopAsync(false);
-            //Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-            //await Navigation.PushAsync(new EasyModePage());
-        //}
-
         private void RunQuitGame(object s, EventArgs e)
         {
             System.Diagnostics.Process.GetCurrentProcess().Kill();

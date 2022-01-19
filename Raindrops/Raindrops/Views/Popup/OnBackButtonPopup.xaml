@@ -23,7 +23,7 @@
     </pages:PopupPage.Animation>
 
     <ContentPage.Content>
-   
+
         <Frame BackgroundColor="Transparent"
                HasShadow="False"
                Padding="0"
@@ -41,12 +41,10 @@
                     HorizontalOptions="FillAndExpand"
                     Margin="20"/>
 
-                <Button Grid.Row="2" Text="برگرد به بازی" Clicked="ResumeButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10" />
-                <Button Grid.Row="3" Text="تکرار بازی" Clicked="RestartButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10"/>
-                <Button Grid.Row="4" Text="منو اصلی" Clicked="MenuButton_Clicke" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10" />
+                <Button Grid.Row="4" Text="برگرد به بازی" Clicked="ResumeButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10" />
                 <Button Grid.Row="5" Text="خروج" Clicked="QuitButton_Clicked" BackgroundColor="#5B5661" TextColor="White" Margin="20, 10"/>
             </Grid>
         </Frame>
-      
+
     </ContentPage.Content>
 </pages:PopupPage>

@@ -4,12 +4,22 @@
              BackgroundImageSource="FondoBackGround.webp"
              x:Class="Raindrops.Views.EasyModePage">
     <ContentPage.Content>
-        <Grid>
-            
+        <Grid Padding="0"
+              x:Name="mainGrid">
+            <Button Text="شروع بازی" 
+                    x:Name="startGame"
+                    FontFamily="IranSensWeb"
+                    TextColor="White" 
+                    Clicked="Button_Clicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    BackgroundColor="LightBlue"
+                    CornerRadius="10"/>
             <Grid x:Name="grid"
-                ColumnDefinitions="*,*,*,*,*">
-            
-            <Grid ColumnDefinitions="*,*"
+                  IsEnabled="False"
+                  IsVisible="False"
+                  ColumnDefinitions="*,*,*,*,*">
+                <Grid ColumnDefinitions="*,*"
                   Grid.Column="3" Opacity=".8"
                   VerticalOptions="Start" Margin="0,20,0,0"
                   BackgroundColor="#ccd7e4">
@@ -20,8 +30,7 @@
                        Grid.Column="1"
                        HorizontalOptions="End"
                        VerticalOptions="Center"/>
-            </Grid>
-
+                </Grid>
                 <Grid ColumnDefinitions="*,*"
                   Grid.Column="2" Opacity=".8"
                   VerticalOptions="Start" Margin="0,20,0,0"
@@ -34,7 +43,7 @@
                        HorizontalOptions="End"
                        VerticalOptions="Center"/>
                 </Grid>
-                
+
                 <ImageButton Source="more.png" 
                              Grid.Column="0" Grid.Row="0"
                              VerticalOptions="Start"
@@ -42,8 +51,11 @@
                              BackgroundColor="Transparent"
                              Margin="0,10,0,0"/>
             </Grid>
-            
+
             <Grid VerticalOptions="End"
+                  IsEnabled="False"
+                  IsVisible="False"
+                  x:Name="keypadGrid"
                   Margin="5">
                 <Grid RowDefinitions="*,*,*,*,*"
                       ColumnDefinitions="*,*,*"
@@ -123,8 +135,6 @@
                             Clicked="OnBtnEnter" TextColor="White"/>
                 </Grid>
             </Grid>
-            
         </Grid>
-        
     </ContentPage.Content>
 </ContentPage>

@@ -68,6 +68,15 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\MexicanFella.json" />
+    <BundleResource Include="Resources\heatfav.json" />
+    <BundleResource Include="Resources\likelove.json" />
+    <BundleResource Include="Resources\MeditatingMan.json" />
+    <BundleResource Include="Resources\SkyGround.webp" />
+    <BundleResource Include="Resources\FondoBackGround.webp" />
+    <BundleResource Include="Resources\iconDrop.webp" />
+    <BundleResource Include="Resources\iconPaint.webp" />
+    <BundleResource Include="Resources\raindrop.webp" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -129,6 +138,9 @@
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.0.0.14</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.8.116</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer">
       <Version>1.5.0</Version>
     </PackageReference>
@@ -141,5 +153,11 @@
       <Project>{A4E906ED-563C-4EF5-8622-400608E0EF9C}</Project>
       <Name>Raindrops</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\darkblue.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\more.png" />
   </ItemGroup>
 </Project>
